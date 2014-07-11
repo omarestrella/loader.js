@@ -19,7 +19,14 @@ var define, requireModule, require, requirejs;
   function Module(name, deps, callback, exports) {
     var defaultDeps = ['require', 'exports', 'module'];
     
-    callback = callback || function () {};
+    if (typeof name === 'function') {
+      var extract = /return (\w+);/
+      var match = name.match(extract);
+      if (match && match[1]) {
+        name = match;
+        callback = name;
+      }
+    }
     
     this.id       = uuid++;
     this.name     = name;
