@@ -18,7 +18,9 @@ var define, requireModule, require, requirejs;
 
   function Module(name, deps, callback, exports) {
     var defaultDeps = ['require', 'exports', 'module'];
-
+    
+    callback = callback || function () {};
+    
     this.id       = uuid++;
     this.name     = name;
     this.deps     = !deps.length && callback.length ? defaultDeps : deps;
