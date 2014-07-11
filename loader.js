@@ -19,15 +19,6 @@ var define, requireModule, require, requirejs;
   function Module(name, deps, callback, exports) {
     var defaultDeps = ['require', 'exports', 'module'];
     
-    if (typeof name === 'function') {
-      var extract = /return (\w+);/
-      var match = name.toString().match(extract);
-      if (match && match[1]) {
-        name = match[1];
-        callback = name;
-      }
-    }
-    
     this.id       = uuid++;
     this.name     = name;
     this.deps     = !deps.length && callback.length ? defaultDeps : deps;
@@ -40,6 +31,15 @@ var define, requireModule, require, requirejs;
     if (!Array.isArray(deps)) {
       callback = deps;
       deps     =  [];
+    }
+    
+    if (typeof name === 'function') {
+      var extract = /return (\w+);/
+      var match = name.toString().match(extract);
+      if (match && match[1]) {
+        name = match[1];
+        callback = name;
+      }
     }
 
     registry[name] = new Module(name, deps, callback);
