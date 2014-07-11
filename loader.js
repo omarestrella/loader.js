@@ -23,7 +23,7 @@ var define, requireModule, require, requirejs;
       var extract = /return (\w+);/
       var match = name.toString().match(extract);
       if (match && match[1]) {
-        name = match;
+        name = match[1];
         callback = name;
       }
     }
