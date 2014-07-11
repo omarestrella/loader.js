@@ -21,7 +21,7 @@ var define, requireModule, require, requirejs;
     
     if (typeof name === 'function') {
       var extract = /return (\w+);/
-      var match = name.match(extract);
+      var match = name.toString().match(extract);
       if (match && match[1]) {
         name = match;
         callback = name;
